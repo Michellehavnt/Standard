@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>cta</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        #cta-root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          background: #0b1b26;
+          color: #eef7f8;
+          font-family: Outfit, Inter, sans-serif;
+          text-align: center;
+        }
+        #cta-glow {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          width: 1500px;
+          height: 1500px;
+          margin: -750px 0 0 -750px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(10, 154, 168, 0.4) 0%, rgba(10, 154, 168, 0) 60%);
+        }
+        .cta-ring {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          border: 3px solid rgba(10, 154, 168, 0.35);
+          border-radius: 50%;
+        }
+        #cta-ring-a { width: 900px; height: 900px; margin: -450px 0 0 -450px; }
+        #cta-ring-b { width: 1300px; height: 1300px; margin: -650px 0 0 -650px; }
+        .cta-stage {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 44px;
+          padding: 0 90px;
+        }
+        #cta-logo {
+          width: 860px;
+          height: auto;
+          display: block;
+        }
+        #cta-stat {
+          font-size: 150px;
+          font-weight: 900;
+          line-height: 1;
+          letter-spacing: -0.04em;
+          color: #0a9aa8;
+          font-variant-numeric: tabular-nums;
+        }
+        #cta-stat-label {
+          font-family: Inter, sans-serif;
+          font-size: 44px;
+          font-weight: 700;
+          color: #c7e3e6;
+          margin-top: -16px;
+        }
+        #cta-button {
+          margin-top: 40px;
+          padding: 36px 84px;
+          border-radius: 999px;
+          background: #0a9aa8;
+          color: #06202a;
+          font-size: 58px;
+          font-weight: 900;
+          letter-spacing: -0.01em;
+        }
+        #cta-url {
+          font-family: Inter, sans-serif;
+          font-size: 38px;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: #eef7f8;
+        }
+      </style>
+
+      <div id="cta-root" data-composition-id="cta" data-width="1080" data-height="1920">
+        <div id="cta-glow" data-layout-ignore></div>
+        <div id="cta-ring-a" class="cta-ring" data-layout-ignore></div>
+        <div id="cta-ring-b" class="cta-ring" data-layout-ignore></div>
+        <section id="cta-stage" class="clip cta-stage" data-start="0" data-duration="4" data-track-index="0">
+          <img id="cta-logo" src="assets/logo.png" alt="AffiliateFinder.ai" />
+          <div id="cta-stat">2,600+</div>
+          <div id="cta-stat-label">brands and agencies already recruit this way</div>
+          <div id="cta-button">Start free</div>
+          <div id="cta-url">affiliatefinder.ai</div>
+        </section>
+      </div>
+
+      <script>
+        (function () {
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo("#cta-glow", { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.9, ease: "power2.out" }, 0);
+          tl.fromTo("#cta-ring-a", { scale: 0.4, opacity: 0 }, { scale: 1, opacity: 1, duration: 1.1, ease: "expo.out" }, 0.05);
+          tl.fromTo("#cta-ring-b", { scale: 0.4, opacity: 0 }, { scale: 1, opacity: 1, duration: 1.4, ease: "expo.out" }, 0.1);
+          tl.fromTo("#cta-ring-a", { rotation: 0 }, { rotation: 18, duration: 3.9, ease: "none", immediateRender: false }, 0.1);
+          tl.fromTo("#cta-ring-b", { rotation: 0 }, { rotation: -12, duration: 3.9, ease: "none", immediateRender: false }, 0.1);
+
+          tl.fromTo("#cta-logo", { scale: 0.7, opacity: 0, filter: "blur(14px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.6, ease: "back.out(1.6)" }, 0.15);
+
+          const stat = { v: 0 };
+          tl.fromTo("#cta-stat", { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 0.6);
+          tl.to(stat, {
+            v: 2600,
+            duration: 1.1,
+            ease: "power2.out",
+            onUpdate: function () {
+              const el = document.getElementById("cta-stat");
+              if (el) el.textContent = Math.round(stat.v).toLocaleString("en-US") + "+";
+            },
+          }, 0.6);
+          tl.fromTo("#cta-stat-label", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "power3.out" }, 0.95);
+          tl.fromTo("#cta-button", { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(2)" }, 1.4);
+          tl.fromTo("#cta-button", { scale: 1 }, { scale: 1.06, duration: 0.5, ease: "sine.inOut", yoyo: true, repeat: 3, immediateRender: false }, 1.9);
+          tl.fromTo("#cta-url", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power3.out" }, 1.7);
+          window.__timelines["cta"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+# Render output and caches
+renders/
+*.mp4
+*.webm
+!assets/**/*.mp4
+!assets/**/*.webm
+.hyperframes/
+snapshots/
+node_modules/
+.DS_Store

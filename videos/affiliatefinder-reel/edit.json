@@ -1,0 +1,17 @@
+{
+  "source": "assets/source.mp4",
+  "sourceWidth": 1920,
+  "sourceHeight": 1080,
+  "sceneDuration": 23.6,
+  "segments": [
+    { "start": 0, "mediaStart": 0, "duration": 23.6 }
+  ],
+  "captions": [
+    { "start": 0.3, "end": 1.6, "text": "Finding affiliates" },
+    { "start": 1.6, "end": 3.0, "text": "used to take" },
+    { "start": 3.0, "end": 4.6, "text": "20 hours a week" },
+    { "start": 4.6, "end": 6.4, "text": "SAMPLE CAPTIONS" },
+    { "start": 6.4, "end": 8.4, "text": "replace with transcript" }
+  ],
+  "placeholderNote": "SOURCE FOOTAGE NOT STAGED - drop the Drive video at assets/source.mp4"
+}

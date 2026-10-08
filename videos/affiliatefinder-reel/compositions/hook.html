@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>hook</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        #hook-root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          background: #0b1b26;
+          color: #eef7f8;
+          font-family: Outfit, Inter, sans-serif;
+        }
+        #hook-glow {
+          position: absolute;
+          left: 50%;
+          top: 42%;
+          width: 1400px;
+          height: 1400px;
+          margin: -700px 0 0 -700px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(10, 154, 168, 0.42) 0%, rgba(10, 154, 168, 0) 62%);
+        }
+        #hook-ghost {
+          position: absolute;
+          left: -40px;
+          top: 1180px;
+          font-size: 420px;
+          font-weight: 900;
+          line-height: 1;
+          letter-spacing: -0.06em;
+          color: rgba(10, 154, 168, 0.14);
+          white-space: nowrap;
+        }
+        #hook-rule {
+          position: absolute;
+          left: 96px;
+          right: 96px;
+          top: 1030px;
+          height: 6px;
+          background: #0a9aa8;
+          transform-origin: left center;
+        }
+        #hook-label {
+          position: absolute;
+          left: 96px;
+          top: 1070px;
+          font-family: Inter, sans-serif;
+          font-size: 34px;
+          font-weight: 700;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          color: #0a9aa8;
+        }
+        .kbs-stage {
+          position: absolute;
+          left: 96px;
+          right: 96px;
+          top: 440px;
+          display: flex;
+          flex-direction: column;
+          gap: 18px;
+        }
+        .kbs-line {
+          font-size: 150px;
+          font-weight: 900;
+          line-height: 0.98;
+          letter-spacing: -0.035em;
+        }
+        .kbs-line .pain { color: #ef4444; }
+        .kbs-line .win { color: #0a9aa8; }
+      </style>
+
+      <div id="hook-root" data-composition-id="hook" data-width="1080" data-height="1920">
+        <div id="hook-glow" data-layout-ignore></div>
+        <div id="hook-ghost" aria-hidden="true" data-layout-ignore data-contrast-ignore>20h</div>
+        <section id="hook-stage" class="clip kbs-stage" data-start="0" data-duration="2.4" data-track-index="0" data-layout-allow-overflow>
+          <div class="kbs-line" id="hook-p1"><span class="pain">20 hours</span></div>
+          <div class="kbs-line" id="hook-p2">a week on</div>
+          <div class="kbs-line" id="hook-p3">affiliate <span class="win">research?</span></div>
+        </section>
+        <div id="hook-rule"></div>
+        <div id="hook-label">There is a faster way</div>
+      </div>
+
+      <script>
+        (function () {
+          const tl = gsap.timeline({ paused: true });
+          const PULSE = 0.3;
+          const BEATS = [PULSE * 0.3, PULSE * 1.6, PULSE * 2.9];
+
+          tl.fromTo("#hook-glow", { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.8, ease: "power2.out" }, 0);
+          tl.fromTo("#hook-glow", { scale: 1 }, { scale: 1.12, duration: 1.4, ease: "sine.inOut", yoyo: true, repeat: 1, immediateRender: false }, 0.8);
+          tl.fromTo("#hook-ghost", { x: 60, opacity: 0 }, { x: 0, opacity: 1, duration: 1.2, ease: "power2.out" }, 0.1);
+
+          tl.fromTo("#hook-p1", { scale: 1.6, filter: "blur(18px)", opacity: 0 }, { scale: 1, filter: "blur(0px)", opacity: 1, duration: 0.45, ease: "power4.out" }, BEATS[0]);
+          tl.fromTo("#hook-p2", { x: -260, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "expo.out" }, BEATS[1]);
+          tl.fromTo("#hook-p3", { y: 80, rotation: 4, opacity: 0 }, { y: 0, rotation: 0, opacity: 1, duration: 0.5, ease: "circ.out" }, BEATS[2]);
+
+          tl.fromTo("#hook-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power3.inOut" }, 1.25);
+          tl.fromTo("#hook-label", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power3.out" }, 1.45);
+
+          window.__timelines["hook"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>
