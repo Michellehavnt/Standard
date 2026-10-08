@@ -13,13 +13,13 @@ This repository serves as a foundation for projects where AI assistants collabor
 ## Project Structure
 
 ```
-Claude-Standard-Umgebung/
-├── CLAUDE.md           # AI assistant guidelines (this file)
-├── README.md           # Project documentation (to be created)
-├── src/                # Source code (to be created)
-├── tests/              # Test files (to be created)
-├── docs/               # Documentation (to be created)
-└── .github/            # GitHub workflows and templates (to be created)
+Standard/
+├── CLAUDE.md                 # AI assistant guidelines (this file)
+├── .claude/skills/           # Project skills (HyperFrames video skills, checked in)
+├── AFPitch/                  # Pitch page (static HTML)
+├── hyperframes/              # HyperFrames video project (HTML -> MP4), see hyperframes/README.md
+├── sales-call-analyzer/      # Sales call analysis app (backend + frontend)
+└── sales-intel-dashboard/    # Sales intelligence dashboard
 ```
 
 > **Note**: This is the initial structure. Update this section as the project evolves.
@@ -108,14 +108,17 @@ git log --oneline -10         # View recent commits
 
 ## Project-Specific Notes
 
-<!-- Add project-specific information here as the project develops -->
+### Video animation with HyperFrames (`hyperframes/`)
 
-This section will be populated with:
-- Build instructions
-- Environment setup
-- API documentation
-- Architecture decisions
-- Known issues and workarounds
+[HyperFrames](https://github.com/heygen-com/hyperframes) renders HTML, CSS and GSAP compositions to deterministic MP4 files. Use it for any request to make, animate or render a video, motion graphic, captioned clip or slideshow.
+
+- **Start with the `/hyperframes` skill.** It routes to the right workflow and domain skills. The skills are versioned in `.claude/skills/`.
+- **Project folder:** `hyperframes/`. Read `hyperframes/CLAUDE.md` before editing compositions. `hyperframes/README.md` explains setup and commands.
+- **Requirements:** Node.js 22+, FFmpeg, and Chrome Headless Shell (`npx hyperframes browser ensure`). Verify with `npx hyperframes doctor`.
+- **Commands** (run inside `hyperframes/`): `npm run dev` (preview), `npm run check` (validation gate, always run after edits), `npm run render` (MP4 into `renders/`, git-ignored).
+- **No CDN assets.** GSAP is vendored at `hyperframes/vendor/gsap.min.js`. Keep all media under `hyperframes/assets/` so renders work offline and in sandboxed environments.
+
+Other sections to add as the project grows: build instructions for the other apps, API documentation, architecture decisions, known issues.
 
 ## Quick Reference
 
@@ -138,5 +141,5 @@ This CLAUDE.md should be updated when:
 
 ---
 
-*Last updated: 2026-01-22*
+*Last updated: 2026-10-08*
 *Repository: Claude-Standard-Umgebung*
