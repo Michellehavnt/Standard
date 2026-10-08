@@ -45,7 +45,8 @@ function ffmpegConcat(out, { video, audio }) {
   const vIn = edit.segments.map((_, i) => `[${i}:v]`).join("");
   const aIn = edit.segments.map((_, i) => `[${i}:a]`).join("");
   let fc = `${vIn}concat=n=${n}:v=1:a=0[vcat];[vcat]${video}[v]`;
-  if (audio) fc += `;${aIn}concat=n=${n}:v=0:a=1[a]`;
+  // Normalise speech to -14 LUFS (streaming loudness target) with a -1.5 dBTP ceiling.
+  if (audio) fc += `;${aIn}concat=n=${n}:v=0:a=1[acat];[acat]loudnorm=I=-14:TP=-1.5:LRA=11[a]`;
   args.push("-filter_complex", fc, "-map", "[v]");
   if (audio) args.push("-map", "[a]", "-c:a", "aac", "-b:a", "160k");
   else args.push("-an");
